@@ -34,3 +34,17 @@ header {
     margin: 0;
   }
 }
+
+.card {
+  border: 1px solid #f8f8f8;
+  padding: 20px;
+  width: 210px;
+  border-radius: 40px;
+}
+
+.button {
+  background: #ffffff;
+  border: 1px solid #f2f2f2;
+  box-sizing: border-box;
+  border-radius: 8px;
+}
