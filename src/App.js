@@ -1,6 +1,21 @@
 function App() {
   return (
+    //все доп классы берутся из библиотеки marco-css
     <div className="wrapper clear">
+      <div className="overlay">
+        <div className="drawer">
+          <h3>Корзина</h3>
+          <div className="cartItem d-flex">
+            <img src="/img/sneakers/2.svg" alt="sneaker " />
+            <div>
+              <p>Мужские Кроссовки Nike Air Max 270</p>
+              <b>12 990 руб.</b>
+            </div>
+            <img src="/img/remove.svg" alt="remove" />
+          </div>
+        </div>
+      </div>
+
       <header className="d-flex justify-between align-center p-40">
         <div className="d-flex align-center">
           <img width={40} height={40} src="/img/logo_header_left.svg" alt="Кроссовки лого" />
@@ -10,9 +25,9 @@ function App() {
           </div>
         </div>
         <ul className="d-flex">
-          <li className="mr-30">
+          <li className="mr-30 d-flex align-center">
             <img width={18} height={18} src="/img/cart.svg" alt="корзина" />
-            <span>1005 рублей</span>
+            <span style={{ marginLeft: 10 }}>1005 рублей</span>
           </li>
           <li>
             <svg
@@ -33,13 +48,18 @@ function App() {
       </header>
 
       <div className="content p-40">
-        <h1 className="mb-40">Все кроссовки</h1>
-        <div className="search-block">
-          <img src="/img/search.svg" alt="search" />
-          <input placeholder="Поиск..." />
+        <div className="d-flex align-center mb-40 justify-between">
+          <h1>Все кроссовки</h1>
+          <div className="search-block d-flex">
+            <img src="/img/search.svg" alt="search" />
+            <input placeholder="Поиск..." />
+          </div>
         </div>
         <div className="d-flex">
           <div className="card">
+            <div className="favorite">
+              <img src="/img/heart-unliked.svg" alt="heart unliked" />
+            </div>
             <img width={133} height={112} src="/img/sneakers/1.svg" alt="Krossi" />
             <h5>Мужские Кроссовки Nike Blazer Mid Suede</h5>
             <div className="d-flex justify-between align-center">
