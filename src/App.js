@@ -1,10 +1,14 @@
+import Card from './components/Card';
+
 function App() {
   return (
     //все доп классы берутся из библиотеки marco-css
     <div className="wrapper clear">
-      <div className="overlay">
+      <div style={{ display: 'none' }} className="overlay">
         <div className="drawer">
-          <h3 className="mb-30">Корзина</h3>
+          <h3 className="mb-30 d-flex justify-between">
+            Корзина <img className="cu-p" src="/img/remove.svg" alt="remove" />{' '}
+          </h3>
           <div className="items">
             <div className="cartItem d-flex align-center mb-20">
               {/* <img
@@ -97,23 +101,11 @@ function App() {
           </div>
         </div>
         <div className="d-flex">
+          <Card />
           <div className="card">
             <div className="favorite">
               <img src="/img/heart-unliked.svg" alt="heart unliked" />
             </div>
-            <img width={133} height={112} src="/img/sneakers/1.svg" alt="Krossi" />
-            <h5>Мужские Кроссовки Nike Blazer Mid Suede</h5>
-            <div className="d-flex justify-between align-center">
-              <div className="d-flex flex-column">
-                <span>Цена:</span>
-                <b>12 999 руб.</b>
-              </div>
-              <button className="button">
-                <img width={11} height={11} src="/img/plus.svg" alt="плюсик" />
-              </button>
-            </div>
-          </div>
-          <div className="card">
             <img width={133} height={112} src="/img/sneakers/2.svg" alt="Krossi" />
             <h5>Мужские Кроссовки Nike Blazer Mid Suede</h5>
             <div className="d-flex justify-between align-center">
@@ -127,6 +119,9 @@ function App() {
             </div>
           </div>
           <div className="card">
+            <div className="favorite">
+              <img src="/img/heart-unliked.svg" alt="heart unliked" />
+            </div>
             <img width={133} height={112} src="/img/sneakers/3.svg" alt="Krossi" />
             <h5>Мужские Кроссовки Nike Blazer Mid Suede</h5>
             <div className="d-flex justify-between align-center">
@@ -140,6 +135,9 @@ function App() {
             </div>
           </div>
           <div className="card">
+            <div className="favorite">
+              <img src="/img/heart-unliked.svg" alt="heart unliked" />
+            </div>
             <img width={133} height={112} src="/img/sneakers/4.svg" alt="Krossi" />
             <h5>Мужские Кроссовки Nike Blazer Mid Suede</h5>
             <div className="d-flex justify-between align-center">
