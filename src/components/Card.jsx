@@ -1,4 +1,9 @@
 function Card(props) {
+
+	const onClickPlus = (a, b) => {
+		console.log(a, b)
+	}
+
   return (
     <div className="card">
       <div className="favorite">
@@ -11,7 +16,7 @@ function Card(props) {
           <span>Цена:</span>
           <b>{props.price} руб.</b>
         </div>
-        <button className="button">
+        <button onClick={onClickPlus} className="button">
           <img width={11} height={11} src="/img/plus.svg" alt="плюсик" />
         </button>
       </div>
