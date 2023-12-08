@@ -1,12 +1,12 @@
+import styles from './Card.module.scss';
+
+console.log(styles);
+
 function Card(props) {
-
-	const onClickPlus = (a, b) => {
-		console.log(a, b)
-	}
-
+  console.log(props);
   return (
-    <div className="card">
-      <div className="favorite">
+    <div className={styles.card}>
+      <div className={styles.favorite}>
         <img src="/img/heart-unliked.svg" alt="heart unliked" />
       </div>
       <img width={133} height={112} src={props.imageUrl} alt="Krossi" />
@@ -16,7 +16,7 @@ function Card(props) {
           <span>Цена:</span>
           <b>{props.price} руб.</b>
         </div>
-        <button onClick={onClickPlus} className="button">
+        <button className={styles.button} onClick={props.onClick}>
           <img width={11} height={11} src="/img/plus.svg" alt="плюсик" />
         </button>
       </div>
