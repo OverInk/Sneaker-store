@@ -19,34 +19,9 @@ const arr = [
 ];
 
 function App() {
-  const test = React.useState(0);
-
-  console.log(test);
-
-  let count = 4;
-
-  const plus = () => {
-    count++;
-  };
-
-  const minus = () => {
-    count--;
-  };
-
   return (
     //все доп классы берутся из библиотеки marco-css
     <div className="wrapper clear">
-      <div>
-        <h1>{count}</h1>
-        <button onClick={plus}>+</button>
-        <button
-          onClick={() => {
-            minus();
-          }}>
-          -
-        </button>
-      </div>
-
       <Drawer />
       <Header />
 
@@ -64,8 +39,8 @@ function App() {
               title={obj.title}
               price={obj.price}
               imageUrl={obj.imageUrl}
-              onClickfavorite={() => console.log('Добавили в закладки')}
-              onClickPlus={() => console.log('Нажали на плюс')}
+              onFavorite={() => console.log('Добавили в закладки')}
+              onPlus={() => console.log('Нажали на плюс')}
             />
           ))}
         </div>
