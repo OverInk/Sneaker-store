@@ -1,3 +1,4 @@
+import React from 'react';
 import Card from './components/Card';
 import Drawer from './components/Drawer';
 import Header from './components/Header';
@@ -18,11 +19,35 @@ const arr = [
 ];
 
 function App() {
+  const test = React.useState(0);
+
+  console.log(test);
+
+  let count = 4;
+
+  const plus = () => {
+    count++;
+  };
+
+  const minus = () => {
+    count--;
+  };
+
   return (
     //все доп классы берутся из библиотеки marco-css
     <div className="wrapper clear">
-      <Drawer />
+      <div>
+        <h1>{count}</h1>
+        <button onClick={plus}>+</button>
+        <button
+          onClick={() => {
+            minus();
+          }}>
+          -
+        </button>
+      </div>
 
+      <Drawer />
       <Header />
 
       <div className="content p-40">
@@ -39,7 +64,8 @@ function App() {
               title={obj.title}
               price={obj.price}
               imageUrl={obj.imageUrl}
-              onClick={() => console.log(obj)}
+              onClickfavorite={() => console.log('Добавили в закладки')}
+              onClickPlus={() => console.log('Нажали на плюс')}
             />
           ))}
         </div>
