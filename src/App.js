@@ -19,12 +19,15 @@ const arr = [
 ];
 
 function App() {
+  const [cartOpened, setCartOpened] = React.useState(false);
+
   return (
     //все доп классы берутся из библиотеки marco-css
     <div className="wrapper clear">
-      <Drawer />
-      <Header />
-
+      //амперсанты, которые работают так: если слева true, то выполняется дальше код, справа. Если
+      отрицательно, то ничего не выполняется
+      {cartOpened && <Drawer onClose={() => setCartOpened(false)} />}
+      <Header onClickCart={() => setCartOpened(true)} />
       <div className="content p-40">
         <div className="d-flex align-center mb-40 justify-between">
           <h1>Все кроссовки</h1>
