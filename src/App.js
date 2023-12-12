@@ -3,29 +3,36 @@ import Card from './components/Card';
 import Drawer from './components/Drawer';
 import Header from './components/Header';
 
-const arr = [
-  {
-    title: 'Мужские Кроссовки Nike Blazer Mid Suede',
-    price: 12999,
-    imageUrl: '/img/sneakers/1.svg',
-  },
-  { title: 'Мужские Кроссовки Nike Air Max 270', price: 12999, imageUrl: '/img/sneakers/2.svg' },
-  {
-    title: 'Мужские Кроссовки Nike Blazer Mid Suede',
-    price: 8999,
-    imageUrl: '/img/sneakers/3.svg',
-  },
-  { title: 'Кроссовки Puma X Aka Boku Future Rider', price: 8999, imageUrl: '/img/sneakers/4.svg' },
-];
+// const arr = [
+//   {
+//     title: 'Мужские Кроссовки Nike Blazer Mid Suede',
+//     price: 12999,
+//     imageUrl: '/img/sneakers/1.svg',
+//   },
+//   { title: 'Мужские Кроссовки Nike Air Max 270', price: 12999, imageUrl: '/img/sneakers/2.svg' },
+//   {
+//     title: 'Мужские Кроссовки Nike Blazer Mid Suede',
+//     price: 8999,
+//     imageUrl: '/img/sneakers/3.svg',
+//   },
+//   { title: 'Кроссовки Puma X Aka Boku Future Rider', price: 8999, imageUrl: '/img/sneakers/4.svg' },
+// ];
 
 function App() {
+
+	const [items, setItems] = React.useState([])
+
   const [cartOpened, setCartOpened] = React.useState(false);
+
+  React.useEffect(() => {fetch('https://65776b85197926adf62e4406.mockapi.io/items').then((res) => {
+	return res.json();
+  }).then((json) => {setItems(json)});}, []);
 
   return (
     //все доп классы берутся из библиотеки marco-css
+	 //амперсанты, которые работают так: если слева true, то выполняется дальше код, справа. Если 
+	 //отрицательно, то ничего не выполняется
     <div className="wrapper clear">
-      //амперсанты, которые работают так: если слева true, то выполняется дальше код, справа. Если
-      отрицательно, то ничего не выполняется
       {cartOpened && <Drawer onClose={() => setCartOpened(false)} />}
       <Header onClickCart={() => setCartOpened(true)} />
       <div className="content p-40">
@@ -36,8 +43,8 @@ function App() {
             <input placeholder="Поиск..." />
           </div>
         </div>
-        <div className="d-flex">
-          {arr.map((obj) => (
+        <div className="d-flex flex-wrap">
+          {items.map((obj) => (
             <Card
               title={obj.title}
               price={obj.price}
