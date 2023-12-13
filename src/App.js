@@ -19,19 +19,26 @@ import Header from './components/Header';
 // ];
 
 function App() {
+  const [items, setItems] = React.useState([]);
 
-	const [items, setItems] = React.useState([])
+  const [cartItems, setCartItems] = React.useState([]);
 
   const [cartOpened, setCartOpened] = React.useState(false);
 
-  React.useEffect(() => {fetch('https://65776b85197926adf62e4406.mockapi.io/items').then((res) => {
-	return res.json();
-  }).then((json) => {setItems(json)});}, []);
+  React.useEffect(() => {
+    fetch('https://65776b85197926adf62e4406.mockapi.io/items')
+      .then((res) => {
+        return res.json();
+      })
+      .then((json) => {
+        setItems(json);
+      });
+  }, []);
 
   return (
     //все доп классы берутся из библиотеки marco-css
-	 //амперсанты, которые работают так: если слева true, то выполняется дальше код, справа. Если 
-	 //отрицательно, то ничего не выполняется
+    //амперсанты, которые работают так: если слева true, то выполняется дальше код, справа. Если
+    //отрицательно, то ничего не выполняется
     <div className="wrapper clear">
       {cartOpened && <Drawer onClose={() => setCartOpened(false)} />}
       <Header onClickCart={() => setCartOpened(true)} />
