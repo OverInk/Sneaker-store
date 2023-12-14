@@ -1,5 +1,4 @@
 function Header({ onClickCart }) {
-  console.log(onClickCart);
   return (
     <header className="d-flex justify-between align-center p-40">
       <div className="d-flex align-center">

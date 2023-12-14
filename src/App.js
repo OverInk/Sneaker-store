@@ -23,6 +23,8 @@ function App() {
 
   const [cartItems, setCartItems] = React.useState([]);
 
+  const [searchValue, setSearchValue] = React.useState('');
+
   const [cartOpened, setCartOpened] = React.useState(false);
 
   React.useEffect(() => {
@@ -39,6 +41,10 @@ function App() {
     setCartItems((prev) => [...prev, obj]);
   };
 
+  const onChangeSearchValue = (event) => {
+    setSearchValue(event.target.value);
+  };
+
   return (
     //все доп классы берутся из библиотеки marco-css
     //амперсанты, которые работают так: если слева true, то выполняется дальше код, справа. Если
@@ -48,15 +54,17 @@ function App() {
       <Header onClickCart={() => setCartOpened(true)} />
       <div className="content p-40">
         <div className="d-flex align-center mb-40 justify-between">
-          <h1>Все кроссовки</h1>
+          <h1>{searchValue ? `Поиск по запросу: "${searchValue}"` : 'Все кроссовки'}</h1>
           <div className="search-block d-flex">
             <img src="/img/search.svg" alt="search" />
-            <input placeholder="Поиск..." />
+            <img className="clear cu-p" src="/img/remove.svg" alt="remove" />
+            <input onChange={onChangeSearchValue} value={searchValue} placeholder="Поиск..." />
           </div>
         </div>
         <div className="d-flex flex-wrap">
           {items.map((item) => (
             <Card
+              key={item.id}
               title={item.title}
               price={item.price}
               imageUrl={item.imageUrl}
