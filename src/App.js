@@ -1,22 +1,10 @@
 import React from 'react';
+import axios from 'axios';
 import Card from './components/Card';
 import Drawer from './components/Drawer';
 import Header from './components/Header';
 
-// const arr = [
-//   {
-//     title: 'Мужские Кроссовки Nike Blazer Mid Suede',
-//     price: 12999,
-//     imageUrl: '/img/sneakers/1.svg',
-//   },
-//   { title: 'Мужские Кроссовки Nike Air Max 270', price: 12999, imageUrl: '/img/sneakers/2.svg' },
-//   {
-//     title: 'Мужские Кроссовки Nike Blazer Mid Suede',
-//     price: 8999,
-//     imageUrl: '/img/sneakers/3.svg',
-//   },
-//   { title: 'Кроссовки Puma X Aka Boku Future Rider', price: 8999, imageUrl: '/img/sneakers/4.svg' },
-// ];
+
 
 function App() {
   const [items, setItems] = React.useState([]);
@@ -28,16 +16,23 @@ function App() {
   const [cartOpened, setCartOpened] = React.useState(false);
 
   React.useEffect(() => {
-    fetch('https://65776b85197926adf62e4406.mockapi.io/items')
-      .then((res) => {
-        return res.json();
-      })
-      .then((json) => {
-        setItems(json);
-      });
+   //  fetch('https://65776b85197926adf62e4406.mockapi.io/items')
+   //    .then((res) => {
+   //      return res.json();
+   //    })
+   //    .then((json) => {
+   //      setItems(json);
+   //    });
+
+		axios.get('https://65776b85197926adf62e4406.mockapi.io/items').then( res => {
+			setItems(res.data)
+		});
   }, []);
 
   const onAddToCart = (obj) => {
+	axios.get('https://65776b85197926adf62e4406.mockapi.io/items').then( res => {
+			setItems(res.data)
+		});
     setCartItems((prev) => [...prev, obj]);
   };
 
@@ -57,12 +52,12 @@ function App() {
           <h1>{searchValue ? `Поиск по запросу: "${searchValue}"` : 'Все кроссовки'}</h1>
           <div className="search-block d-flex">
             <img src="/img/search.svg" alt="search" />
-            <img className="clear cu-p" src="/img/remove.svg" alt="remove" />
+            {searchValue && <img onClick={() => setSearchValue('')} className="clear cu-p" src="/img/remove.svg" alt="remove" />}
             <input onChange={onChangeSearchValue} value={searchValue} placeholder="Поиск..." />
           </div>
         </div>
         <div className="d-flex flex-wrap">
-          {items.map((item) => (
+          {items.filter((item) => item.title.toLowerCase().includes(searchValue)).map((item) => (
             <Card
               key={item.id}
               title={item.title}
