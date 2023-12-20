@@ -1,4 +1,5 @@
 import React from 'react';
+import { Route } from 'react-router-dom';
 import axios from 'axios';
 import Card from './components/Card';
 import Drawer from './components/Drawer';
@@ -8,6 +9,8 @@ function App() {
   const [items, setItems] = React.useState([]);
 
   const [cartItems, setCartItems] = React.useState([]);
+
+  const [favorite, setFavorite] = React.useState([]);
 
   const [searchValue, setSearchValue] = React.useState('');
 
@@ -41,6 +44,11 @@ function App() {
     setCartItems((prev) => prev.filter((item) => item.id !== id));
   };
 
+  const onAddToFavorite = (obj) => {
+    axios.post('https://658337464d1ee97c6bcdaa98.mockapi.io/favorites', obj);
+    setFavorite((prev) => [...prev, obj]);
+  };
+
   const onChangeSearchValue = (event) => {
     setSearchValue(event.target.value);
   };
@@ -49,6 +57,7 @@ function App() {
     //все доп классы берутся из библиотеки marco-css
     //амперсанты, которые работают так: если слева true, то выполняется дальше код, справа. Если
     //отрицательно, то ничего не выполняется
+    //exact- означает строго такой путь у Роуте (Route), перевод "именно"
     <div className="wrapper clear">
       {cartOpened && (
         <Drawer items={cartItems} onRemove={onRemoveItem} onClose={() => setCartOpened(false)} />
@@ -79,7 +88,7 @@ function App() {
                 title={item.title}
                 price={item.price}
                 imageUrl={item.imageUrl}
-                onFavorite={() => console.log('Добавили в закладки')}
+                onFavorite={(obj) => onAddToFavorite(obj)}
                 onPlus={(obj) => onAddToCart(obj)}
               />
             ))}

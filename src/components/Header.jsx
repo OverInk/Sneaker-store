@@ -1,17 +1,26 @@
+import { Link } from 'react-router-dom';
+
 function Header({ onClickCart }) {
   return (
     <header className="d-flex justify-between align-center p-40">
-      <div className="d-flex align-center">
-        <img width={40} height={40} src="/img/logo_header_left.svg" alt="Кроссовки лого" />
-        <div className="headerInfo">
-          <h3 className="text-uppercase">React OverInk</h3>
-          <p className="opacity-5">Магазин лучших кроссовок</p>
+      <Link to="/">
+        <div className="d-flex align-center">
+          <img width={40} height={40} src="/img/logo_header_left.svg" alt="Кроссовки лого" />
+          <div className="headerInfo">
+            <h3 className="text-uppercase">React OverInk</h3>
+            <p className="opacity-5">Магазин лучших кроссовок</p>
+          </div>
         </div>
-      </div>
+      </Link>
       <ul className="d-flex">
         <li onClick={onClickCart} className="mr-30 d-flex align-center cu-p">
           <img width={18} height={18} src="/img/cart.svg" alt="корзина" />
           <span style={{ marginLeft: 10 }}>1005 рублей</span>
+        </li>
+        <li className="mr-20 cu-p">
+          <Link to="/favorites">
+            <img width={18} height={18} src="/img/heart.svg" alt="Heart" />
+          </Link>
         </li>
         <li>
           <svg
