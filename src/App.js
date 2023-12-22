@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import axios from 'axios';
 import Card from './components/Card';
 import Drawer from './components/Drawer';
@@ -59,23 +59,28 @@ function App() {
     //амперсанты, которые работают так: если слева true, то выполняется дальше код, справа. Если
     //отрицательно, то ничего не выполняется
     //exact- означает строго такой путь у Роуте (Route), перевод "именно"
+    //(в reavt-router-dom v6 это уже дефолт, не пишем, в других версиях пишем)
     <div className="wrapper clear">
       {cartOpened && (
         <Drawer items={cartItems} onRemove={onRemoveItem} onClose={() => setCartOpened(false)} />
       )}
       <Header onClickCart={() => setCartOpened(true)} />
 
-      {/* <Route path="/" exact>
-        <Home
-          items={items}
-          searchValue={searchValue}
-          setSearchValue={setSearchValue}
-          onChangeSearchValue={onChangeSearchValue}
-          onAddToCart={onAddToCart}
-          onAddToFavorite={onAddToFavorite}
-        />
-      </Route> */}
-      <div className="content p-40">
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <Home
+              items={items}
+              searchValue={searchValue}
+              setSearchValue={setSearchValue}
+              onChangeSearchValue={onChangeSearchValue}
+              onAddToCart={onAddToCart}
+              onAddToFavorite={onAddToFavorite}
+            />
+          }></Route>
+      </Routes>
+      {/* <div className="content p-40">
         <div className="d-flex align-center mb-40 justify-between">
           <h1>{searchValue ? `Поиск по запросу: "${searchValue}"` : 'Все кроссовки'}</h1>
           <div className="search-block d-flex">
@@ -105,7 +110,7 @@ function App() {
               />
             ))}
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }
