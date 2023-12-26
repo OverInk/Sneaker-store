@@ -33,6 +33,9 @@ function App() {
     axios.get('https://65776b85197926adf62e4406.mockapi.io/cart').then((res) => {
       setCartItems(res.data);
     });
+	 axios.get('https://658337464d1ee97c6bcdaa98.mockapi.io/favorites').then((res) => {
+      setFavorite(res.data);
+    });
   }, []);
 
   const onAddToCart = (obj) => {
@@ -84,7 +87,7 @@ function App() {
 			 <Route
           path="/favorites"
           element={
-            <Favorites/>
+            <Favorites items={favorite} onAddToFavorite={onAddToFavorite}/>
           }>
 			 </Route>
       </Routes>
