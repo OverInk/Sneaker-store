@@ -49,14 +49,20 @@ function App() {
     setCartItems((prev) => prev.filter((item) => item.id !== id));
   };
 
-  const onAddToFavorite = (obj) => {
-    if (favorite.find((obj) => obj.id === obj.id)) {
-      axios.delete(`https://658337464d1ee97c6bcdaa98.mockapi.io/favorites/${obj.id}`);
-      setFavorite((prev) => prev.filter((item) => item.id !== obj.id));
-    } else {
-      axios.post('https://658337464d1ee97c6bcdaa98.mockapi.io/favorites', obj);
-      setFavorite((prev) => [...prev, obj]);
-    }
+
+//try and catch нужен, чтобы отловить ошибку в async..await
+  const onAddToFavorite = async (obj) => {
+    try {
+		if (favorite.find((obj) => obj.id === obj.id)) {
+			axios.delete(`https://658337464d1ee97c6bcdaa98.mockapi.io/favorites/${obj.id}`);
+			// setFavorite((prev) => prev.filter((item) => item.id !== obj.id));
+		 } else {
+			const {data} = await axios.post('https://658337464d1ee97c6bcdaa98.mockapi.io/favorites', obj);
+			setFavorite((prev) => [...prev, data]);
+		 }
+	 } catch(error) {
+		alert('Не удалось добавить в закладки')
+	 }
   };
 
   const onChangeSearchValue = (event) => {
