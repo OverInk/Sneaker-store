@@ -39,8 +39,21 @@ function App() {
   }, []);
 
   const onAddToCart = (obj) => {
-    axios.post('https://65776b85197926adf62e4406.mockapi.io/cart', obj);
-    setCartItems((prev) => [...prev, obj]);
+    try {
+      //Переводим все в Number, ибо сравниваются айди написанные как строчка и как цисло, поэтому приводим все к числу
+      if (cartItems.find((item) => Number(item.id) === Number(obj.id))) {
+        axios.delete(`https://65776b85197926adf62e4406.mockapi.io/cart/${obj.id}`);
+        setCartItems((prev) => prev.filter((item) => Number(item.id) !== Number(obj.id)));
+      } else {
+        axios.post('https://65776b85197926adf62e4406.mockapi.io/cart', obj);
+        setCartItems((prev) => [...prev, obj]);
+      }
+    } catch (error) {
+      alert('Не удалось добавить в закладки');
+    }
+
+    //  axios.post('https://65776b85197926adf62e4406.mockapi.io/cart', obj);
+    //  setCartItems((prev) => [...prev, obj]);
   };
 
   const onRemoveItem = (id) => {
@@ -49,20 +62,22 @@ function App() {
     setCartItems((prev) => prev.filter((item) => item.id !== id));
   };
 
-
-//try and catch нужен, чтобы отловить ошибку в async..await
+  //try and catch нужен, чтобы отловить ошибку в async..await
   const onAddToFavorite = async (obj) => {
     try {
-		if (favorite.find((obj) => obj.id === obj.id)) {
-			axios.delete(`https://658337464d1ee97c6bcdaa98.mockapi.io/favorites/${obj.id}`);
-			// setFavorite((prev) => prev.filter((item) => item.id !== obj.id));
-		 } else {
-			const {data} = await axios.post('https://658337464d1ee97c6bcdaa98.mockapi.io/favorites', obj);
-			setFavorite((prev) => [...prev, data]);
-		 }
-	 } catch(error) {
-		alert('Не удалось добавить в закладки')
-	 }
+      if (favorite.find((obj) => obj.id === obj.id)) {
+        axios.delete(`https://658337464d1ee97c6bcdaa98.mockapi.io/favorites/${obj.id}`);
+        // setFavorite((prev) => prev.filter((item) => item.id !== obj.id));
+      } else {
+        const { data } = await axios.post(
+          'https://658337464d1ee97c6bcdaa98.mockapi.io/favorites',
+          obj,
+        );
+        setFavorite((prev) => [...prev, data]);
+      }
+    } catch (error) {
+      alert('Не удалось добавить в закладки');
+    }
   };
 
   const onChangeSearchValue = (event) => {
