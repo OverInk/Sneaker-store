@@ -27,15 +27,19 @@ function App() {
     //      setItems(json);
     //    });
 
-    axios.get('https://65776b85197926adf62e4406.mockapi.io/items').then((res) => {
-      setItems(res.data);
-    });
-    axios.get('https://65776b85197926adf62e4406.mockapi.io/cart').then((res) => {
-      setCartItems(res.data);
-    });
-    axios.get('https://658337464d1ee97c6bcdaa98.mockapi.io/favorites').then((res) => {
-      setFavorite(res.data);
-    });
+    async function fetchData() {
+      const cartResponse = await axios.get('https://65776b85197926adf62e4406.mockapi.io/cart');
+      const favoritesResponse = await axios.get(
+        'https://658337464d1ee97c6bcdaa98.mockapi.io/favorites',
+      );
+      const itemsResponse = await axios.get('https://65776b85197926adf62e4406.mockapi.io/items');
+
+      setCartItems(cartResponse.data);
+      setFavorite(favoritesResponse.data);
+      setItems(itemsResponse.data);
+    }
+
+    fetchData();
   }, []);
 
   const onAddToCart = (obj) => {
@@ -102,6 +106,7 @@ function App() {
           element={
             <Home
               items={items}
+              cartItems={cartItems}
               searchValue={searchValue}
               setSearchValue={setSearchValue}
               onChangeSearchValue={onChangeSearchValue}
