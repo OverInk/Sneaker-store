@@ -1,15 +1,10 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import axios from 'axios';
-import Card from './components/Card';
 import Drawer from './components/Drawer';
 import Header from './components/Header';
 import Home from './pages/Home';
 import Favorites from './pages/Favorites';
-import { createContext } from 'vm';
-
-const AppContext = createContext();
-console.log(AppContext);
 
 function App() {
   const [items, setItems] = React.useState([]);

@@ -44,7 +44,6 @@ header {
   padding: 0 15px;
   position: relative;
 
-
   input {
     border: 0;
     padding: 10px;
@@ -53,11 +52,11 @@ header {
   }
 
   .clear {
-	position: absolute;
-	right: 13px;
-	top:10px;
-	width:18px;
-	height: 18px;
+    position: absolute;
+    right: 13px;
+    top: 10px;
+    width: 18px;
+    height: 18px;
   }
 }
 
@@ -89,6 +88,26 @@ header {
 
   h3 {
     font-size: 24px;
+  }
+}
+.flex-drawer {
+  height: 100%;
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.empty-drawer {
+  display: flex;
+  flex-direction: column;
+
+  h2 {
+    margin-bottom: 20px;
+  }
+
+  p {
+    margin-bottom: 20px;
   }
 }
 .items {

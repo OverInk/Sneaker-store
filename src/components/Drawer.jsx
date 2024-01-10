@@ -7,7 +7,7 @@ function Drawer({ onClose, onRemove, items }) {
         </h3>
 
         {items.length > 0 ? (
-          <div>
+          <div className="flex-drawer">
             <div className="items">
               {items.map((obj) => (
                 <div key={obj.id} className="cartItem d-flex align-center mb-20">
@@ -47,7 +47,7 @@ function Drawer({ onClose, onRemove, items }) {
             </div>
           </div>
         ) : (
-          <div class="d-flex align-center justify-center">
+          <div class="empty-drawer">
             <h2>Корзина пустая</h2>
             <p class="opacity-6">Добавьте хотя бы одну пару кроссовок, чтобы сделать заказ</p>
             <button onClick={() => onClose()}>Вернуться назад</button>
