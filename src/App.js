@@ -6,6 +6,8 @@ import Header from './components/Header';
 import Home from './pages/Home';
 import Favorites from './pages/Favorites';
 
+import AppContext from './context';
+
 function App() {
   const [items, setItems] = React.useState([]);
   const [cartItems, setCartItems] = React.useState([]);
@@ -92,31 +94,33 @@ function App() {
     //exact- означает строго такой путь у Роуте (Route), перевод "именно"
     //(в reavt-router-dom v6 это уже дефолт, не пишем, в других версиях пишем)
     <div className="wrapper clear">
-      {cartOpened && (
-        <Drawer items={cartItems} onRemove={onRemoveItem} onClose={() => setCartOpened(false)} />
-      )}
-      <Header onClickCart={() => setCartOpened(true)} />
+      <AppContext.Provider value={{ items, favorite, cartItems }}>
+        {cartOpened && (
+          <Drawer items={cartItems} onRemove={onRemoveItem} onClose={() => setCartOpened(false)} />
+        )}
+        <Header onClickCart={() => setCartOpened(true)} />
 
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <Home
-              items={items}
-              cartItems={cartItems}
-              searchValue={searchValue}
-              setSearchValue={setSearchValue}
-              onChangeSearchValue={onChangeSearchValue}
-              onAddToCart={onAddToCart}
-              onAddToFavorite={onAddToFavorite}
-              isLoading={isLoading}
-            />
-          }></Route>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <Home
+                items={items}
+                cartItems={cartItems}
+                searchValue={searchValue}
+                setSearchValue={setSearchValue}
+                onChangeSearchValue={onChangeSearchValue}
+                onAddToCart={onAddToCart}
+                onAddToFavorite={onAddToFavorite}
+                isLoading={isLoading}
+              />
+            }></Route>
 
-        <Route
-          path="/favorites"
-          element={<Favorites items={favorite} onAddToFavorite={onAddToFavorite} />}></Route>
-      </Routes>
+          <Route
+            path="/favorites"
+            element={<Favorites onAddToFavorite={onAddToFavorite} />}></Route>
+        </Routes>
+      </AppContext.Provider>
     </div>
   );
 }
