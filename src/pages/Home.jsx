@@ -2,7 +2,6 @@ import Card from '../components/Card';
 
 function Home({
   items,
-  cartItems,
   searchValue,
   setSearchValue,
   onChangeSearchValue,
@@ -20,8 +19,6 @@ function Home({
         //   key={items.id}
         onFavorite={(obj) => onAddToFavorite(obj)}
         onPlus={(obj) => onAddToCart(obj)}
-        //значение some если хоть одно будет true, то он вернет булевое значение true
-        added={cartItems.some((obj) => Number(obj.id) === Number(item.id))}
         loading={isLoading}
         //   title={item.title}
         //   price={item.price}

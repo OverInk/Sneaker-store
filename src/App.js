@@ -68,9 +68,9 @@ function App() {
   //try and catch нужен, чтобы отловить ошибку в async..await
   const onAddToFavorite = async (obj) => {
     try {
-      if (favorite.find((obj) => obj.id === obj.id)) {
+      if (favorite.find((obj) => Number(obj.id) === Number(obj.id))) {
         axios.delete(`https://658337464d1ee97c6bcdaa98.mockapi.io/favorites/${obj.id}`);
-        // setFavorite((prev) => prev.filter((item) => item.id !== obj.id));
+        setFavorite((prev) => prev.filter((item) => Number(item.id) !== Number(obj.id)));
       } else {
         const { data } = await axios.post(
           'https://658337464d1ee97c6bcdaa98.mockapi.io/favorites',
@@ -87,6 +87,11 @@ function App() {
     setSearchValue(event.target.value);
   };
 
+  //значение some если хоть одно будет true, то он вернет булевое значение true
+  const isItemAdded = (id) => {
+    return cartItems.some((obj) => Number(obj.id) === Number(id));
+  };
+
   return (
     //все доп классы берутся из библиотеки marco-css
     //амперсанты, которые работают так: если слева true, то выполняется дальше код, справа. Если
@@ -94,7 +99,7 @@ function App() {
     //exact- означает строго такой путь у Роуте (Route), перевод "именно"
     //(в reavt-router-dom v6 это уже дефолт, не пишем, в других версиях пишем)
     <div className="wrapper clear">
-      <AppContext.Provider value={{ items, favorite, cartItems }}>
+      <AppContext.Provider value={{ items, favorite, cartItems, isItemAdded }}>
         {cartOpened && (
           <Drawer items={cartItems} onRemove={onRemoveItem} onClose={() => setCartOpened(false)} />
         )}
