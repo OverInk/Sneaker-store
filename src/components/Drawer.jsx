@@ -2,12 +2,15 @@ import React from 'react';
 import axios from 'axios';
 import Info from './Info';
 import AppContext from '../context';
+// import { resolve } from 'path';
+
+// const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 function Drawer({ onClose, onRemove, items }) {
   const { cartItems, setCartItems } = React.useContext(AppContext);
   const [orderId, setOrderId] = React.useState(null);
   const [isOrderComplete, setIsOrderComplete] = React.useState(false);
-  const [oisLoading, setIsLoading] = React.useState(false);
+  const [isLoading, setIsLoading] = React.useState(false);
 
   const onClickOrder = async () => {
     try {
@@ -15,10 +18,18 @@ function Drawer({ onClose, onRemove, items }) {
       const { data } = await axios.post('https://658337464d1ee97c6bcdaa98.mockapi.io/orders', {
         items: cartItems,
       });
-      await axios.put('https://65776b85197926adf62e4406.mockapi.io/cart', []);
+      // await axios.put('https://65776b85197926adf62e4406.mockapi.io/cart', []);
       setOrderId(data.id);
       setIsOrderComplete(true);
       setCartItems([]);
+
+      // for (let i = 0; i < cartItems.length; i++) {
+      //   const item = cartItems[i];
+      //   await axios.delete(
+      //     'https://658337464d1ee97c6bcdaa98.mockapi.io/orders' + item.onClickOrder,
+      //   );
+      //   await delay(1000);
+      // }
     } catch (error) {
       alert('Не удалось создать заказ');
     }
