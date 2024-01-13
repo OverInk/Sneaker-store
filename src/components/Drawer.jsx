@@ -1,4 +1,31 @@
+import React from 'react';
+import axios from 'axios';
+import Info from './Info';
+import AppContext from '../context';
+
 function Drawer({ onClose, onRemove, items }) {
+  const { cartItems, setCartItems } = React.useContext(AppContext);
+  const [orderId, setOrderId] = React.useState(null);
+  const [isOrderComplete, setIsOrderComplete] = React.useState(false);
+  const [oisLoading, setIsLoading] = React.useState(false);
+
+  const onClickOrder = async () => {
+    try {
+      setIsLoading(true);
+      const { data } = await axios.post('https://658337464d1ee97c6bcdaa98.mockapi.io/orders', {
+        items: cartItems,
+      });
+      await axios.put('https://65776b85197926adf62e4406.mockapi.io/cart', []);
+      setOrderId(data.id);
+      setIsOrderComplete(true);
+      setCartItems([]);
+    } catch (error) {
+      alert('Не удалось создать заказ');
+    }
+
+    setIsLoading(false);
+  };
+
   return (
     <div className="overlay">
       <div className="drawer">
@@ -41,17 +68,20 @@ function Drawer({ onClose, onRemove, items }) {
                   <b>1074 руб. </b>
                 </li>
               </ul>
-              <button className="greenButton">
+              <button onClick={onClickOrder} className="greenButton">
                 Оформить заказ <img src="/img/arrow.svg" alt="arrow" />{' '}
               </button>
             </div>
           </div>
         ) : (
-          <div class="empty-drawer">
-            <h2>Корзина пустая</h2>
-            <p class="opacity-6">Добавьте хотя бы одну пару кроссовок, чтобы сделать заказ</p>
-            <button onClick={() => onClose()}>Вернуться назад</button>
-          </div>
+          <Info
+            title={setCartItems ? 'Заказ оформлен!' : 'Корзина пустая'}
+            description={
+              setCartItems
+                ? `Ваш заказ #${orderId} будет передан курьерской службе`
+                : 'Добавьте хотя бы одну пару кроссовок, чтобы сделать заказ'
+            }
+          />
         )}
 
         {/* <div class="d-flex align-center justify-center">

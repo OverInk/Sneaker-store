@@ -99,7 +99,8 @@ function App() {
     //exact- означает строго такой путь у Роуте (Route), перевод "именно"
     //(в reavt-router-dom v6 это уже дефолт, не пишем, в других версиях пишем)
     <div className="wrapper clear">
-      <AppContext.Provider value={{ items, favorite, cartItems, isItemAdded }}>
+      <AppContext.Provider
+        value={{ items, favorite, cartItems, isItemAdded, setCartOpened, setCartItems }}>
         {cartOpened && (
           <Drawer items={cartItems} onRemove={onRemoveItem} onClose={() => setCartOpened(false)} />
         )}
