@@ -1,6 +1,13 @@
+import React from 'react';
 import { Link } from 'react-router-dom';
+import AppContext from '../context';
 
 function Header({ onClickCart }) {
+  const { cartItems } = React.useContext(AppContext);
+
+  //   console.log(cartItems.reduce((sum, obj) => obj.price + sum, 0));
+  const totalPrice = cartItems.reduce((sum, obj) => obj.price + sum, 0);
+
   return (
     <header className="d-flex justify-between align-center p-40">
       <Link to="/">
@@ -15,7 +22,7 @@ function Header({ onClickCart }) {
       <ul className="d-flex">
         <li onClick={onClickCart} className="mr-30 d-flex align-center cu-p">
           <img width={18} height={18} src="/img/cart.svg" alt="корзина" />
-          <span style={{ marginLeft: 10 }}>1005 рублей</span>
+          <span style={{ marginLeft: 10 }}>{totalPrice} рублей</span>
         </li>
         <li className="mr-20 cu-p">
           <Link to="/favorites">

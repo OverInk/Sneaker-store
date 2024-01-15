@@ -16,6 +16,8 @@ function App() {
   const [cartOpened, setCartOpened] = React.useState(false);
   const [isLoading, setIsLoading] = React.useState(true);
 
+  console.log(cartItems);
+
   React.useEffect(() => {
     //  fetch('https://65776b85197926adf62e4406.mockapi.io/items')
     //    .then((res) => {
