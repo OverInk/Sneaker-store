@@ -6,6 +6,9 @@ function Header({ onClickCart }) {
   const { cartItems } = React.useContext(AppContext);
 
   //   console.log(cartItems.reduce((sum, obj) => obj.price + sum, 0));
+  // метод reduce нужен длчя того, чтобы пробежаться по каждому значению в массиве
+  // и вытащить одну переменную и задать первоначальное значенине
+  // arr.reduce(() => {}, 0) === arr.reduce((sum, obj) => obj.price + sum, 0)
   const totalPrice = cartItems.reduce((sum, obj) => obj.price + sum, 0);
 
   return (
