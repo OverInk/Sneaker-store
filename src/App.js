@@ -7,6 +7,7 @@ import Home from './pages/Home';
 import Favorites from './pages/Favorites';
 
 import AppContext from './context';
+import Orders from './pages/Orders';
 
 function App() {
   const [items, setItems] = React.useState([]);
@@ -102,7 +103,16 @@ function App() {
     //(в reavt-router-dom v6 это уже дефолт, не пишем, в других версиях пишем)
     <div className="wrapper clear">
       <AppContext.Provider
-        value={{ items, favorite, cartItems, isItemAdded, setCartOpened, setCartItems }}>
+        value={{
+          items,
+          favorite,
+          cartItems,
+          isItemAdded,
+          setCartOpened,
+          setCartItems,
+          onAddToFavorite,
+          onAddToCart,
+        }}>
         {cartOpened && (
           <Drawer items={cartItems} onRemove={onRemoveItem} onClose={() => setCartOpened(false)} />
         )}
@@ -127,6 +137,8 @@ function App() {
           <Route
             path="/favorites"
             element={<Favorites onAddToFavorite={onAddToFavorite} />}></Route>
+
+          <Route path="/orders" element={<Orders />}></Route>
         </Routes>
       </AppContext.Provider>
     </div>
