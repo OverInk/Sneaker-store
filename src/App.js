@@ -113,9 +113,12 @@ function App() {
           onAddToFavorite,
           onAddToCart,
         }}>
-        {cartOpened && (
-          <Drawer items={cartItems} onRemove={onRemoveItem} onClose={() => setCartOpened(false)} />
-        )}
+        <Drawer
+          items={cartItems}
+          onRemove={onRemoveItem}
+          onClose={() => setCartOpened(false)}
+          opened={cartOpened}
+        />
         <Header onClickCart={() => setCartOpened(true)} />
 
         <Routes>
