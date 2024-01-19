@@ -5,6 +5,7 @@ import AppContext from '../../context';
 
 function Card({
   id,
+  parentId,
   onFavorite,
   imageUrl,
   title,
@@ -16,9 +17,10 @@ function Card({
   const { isItemAdded } = React.useContext(AppContext);
   //   const [isAdded, setIsAdded] = React.useState(added);
   const [isFavorite, setIsFavorite] = React.useState(favorited);
+  const objA = { id, parentId: id, imageUrl, title, price };
 
   const onClickPlus = () => {
-    onPlus({ id, imageUrl, title, price });
+    onPlus(objA);
     //  setIsAdded(!isAdded);
   };
 
@@ -61,7 +63,7 @@ function Card({
               <img
                 className={styles.plus}
                 onClick={onClickPlus}
-                src={isItemAdded(id) ? '/img/check-mark.svg' : '/img/plus.svg'}
+                src={isItemAdded(parentId) ? '/img/check-mark.svg' : '/img/plus.svg'}
                 alt="плюсик"
               />
             )}

@@ -29,33 +29,46 @@ function App() {
     //    });
 
     async function fetchData() {
-      const cartResponse = await axios.get('https://65776b85197926adf62e4406.mockapi.io/cart');
-      const favoritesResponse = await axios.get(
-        'https://658337464d1ee97c6bcdaa98.mockapi.io/favorites',
-      );
-      const itemsResponse = await axios.get('https://65776b85197926adf62e4406.mockapi.io/items');
+      try {
+        //в Promise all юудет выполняться каждый промис(promise)
+        //где будет возвращаться массив. И в каждый элемент массива будет
+        // заполняться данными из промиссов соотвественно(!)
+        const [cartResponse, favoritesResponse, itemsResponse] = await Promise.all([
+          axios.get('https://65776b85197926adf62e4406.mockapi.io/cart'),
+          axios.get('https://658337464d1ee97c6bcdaa98.mockapi.io/favorites'),
+          axios.get('https://65776b85197926adf62e4406.mockapi.io/items'),
+        ]);
+        //   const cartResponse = await axios.get('https://65776b85197926adf62e4406.mockapi.io/cart');
+        //   const favoritesResponse = await axios.get(
+        //     'https://658337464d1ee97c6bcdaa98.mockapi.io/favorites',
+        //   );
+        //   const itemsResponse = await axios.get('https://65776b85197926adf62e4406.mockapi.io/items');
 
-      setIsLoading(false);
-      setCartItems(cartResponse.data);
-      setFavorite(favoritesResponse.data);
-      setItems(itemsResponse.data);
+        setIsLoading(false);
+        setCartItems(cartResponse.data);
+        setFavorite(favoritesResponse.data);
+        setItems(itemsResponse.data);
+      } catch (error) {
+        alert('Ошибка при запросе данных!');
+      }
     }
 
     fetchData();
   }, []);
 
-  const onAddToCart = (obj) => {
+  const onAddToCart = async (obj) => {
     try {
       //Переводим все в Number, ибо сравниваются айди написанные как строчка и как цисло, поэтому приводим все к числу
       if (cartItems.find((item) => Number(item.id) === Number(obj.id))) {
-        axios.delete(`https://65776b85197926adf62e4406.mockapi.io/cart/${obj.id}`);
         setCartItems((prev) => prev.filter((item) => Number(item.id) !== Number(obj.id)));
+        axios.delete(`https://65776b85197926adf62e4406.mockapi.io/cart/${obj.id}`);
       } else {
         axios.post('https://65776b85197926adf62e4406.mockapi.io/cart', obj);
         setCartItems((prev) => [...prev, obj]);
       }
     } catch (error) {
       alert('Не удалось добавить в закладки');
+      console.error(error);
     }
 
     //  axios.post('https://65776b85197926adf62e4406.mockapi.io/cart', obj);
@@ -63,9 +76,14 @@ function App() {
   };
 
   const onRemoveItem = (id) => {
-    axios.delete(`https://65776b85197926adf62e4406.mockapi.io/cart/${id}`);
-    console.log(id);
-    setCartItems((prev) => prev.filter((item) => item.id !== id));
+    try {
+      axios.delete(`https://65776b85197926adf62e4406.mockapi.io/cart/${id}`);
+      console.log(id);
+      setCartItems((prev) => prev.filter((item) => item.id !== id));
+    } catch (error) {
+      alert('Ошибка при удалении из корзины!');
+      console.error(error);
+    }
   };
 
   //try and catch нужен, чтобы отловить ошибку в async..await
@@ -83,6 +101,7 @@ function App() {
       }
     } catch (error) {
       alert('Не удалось добавить в закладки');
+      console.error(error);
     }
   };
 
@@ -92,7 +111,8 @@ function App() {
 
   //значение some если хоть одно будет true, то он вернет булевое значение true
   const isItemAdded = (id) => {
-    return cartItems.some((obj) => Number(obj.id) === Number(id));
+    console.log(cartItems, 222);
+    return cartItems.some((obj) => Number(obj.parentId) === Number(id));
   };
 
   return (
