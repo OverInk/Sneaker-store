@@ -59,12 +59,24 @@ function App() {
   const onAddToCart = async (obj) => {
     try {
       //Переводим все в Number, ибо сравниваются айди написанные как строчка и как цисло, поэтому приводим все к числу
-      if (cartItems.find((item) => Number(item.id) === Number(obj.id))) {
-        setCartItems((prev) => prev.filter((item) => Number(item.id) !== Number(obj.id)));
-        axios.delete(`https://65776b85197926adf62e4406.mockapi.io/cart/${obj.id}`);
+      const findItem = cartItems.find((item) => Number(item.parentId) === Number(obj.id));
+      if (findItem) {
+        setCartItems((prev) => prev.filter((item) => Number(item.parentId) !== Number(obj.id)));
+        axios.delete(`https://65776b85197926adf62e4406.mockapi.io/cart/${findItem.id}`);
       } else {
-        axios.post('https://65776b85197926adf62e4406.mockapi.io/cart', obj);
-        setCartItems((prev) => [...prev, obj]);
+        setCartItems((prev) => [...prev, data]);
+        const { data } = axios.post('https://65776b85197926adf62e4406.mockapi.io/cart', obj);
+        setCartItems((prev) =>
+          prev.map((item) => {
+            if (item.parentId === data.parentId) {
+              return {
+                ...item,
+                id: data.id,
+              };
+            }
+            return item;
+          }),
+        );
       }
     } catch (error) {
       alert('Не удалось добавить в закладки');
@@ -78,8 +90,7 @@ function App() {
   const onRemoveItem = (id) => {
     try {
       axios.delete(`https://65776b85197926adf62e4406.mockapi.io/cart/${id}`);
-      console.log(id);
-      setCartItems((prev) => prev.filter((item) => item.id !== id));
+      setCartItems((prev) => prev.filter((item) => Number(item.id) !== Number(id)));
     } catch (error) {
       alert('Ошибка при удалении из корзины!');
       console.error(error);

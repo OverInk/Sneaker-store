@@ -25,7 +25,7 @@ function Card({
   };
 
   const onClickFavorite = () => {
-    onFavorite({ id, imageUrl, title, price });
+    onFavorite(objA);
     setIsFavorite(!isFavorite);
   };
 
@@ -63,7 +63,7 @@ function Card({
               <img
                 className={styles.plus}
                 onClick={onClickPlus}
-                src={isItemAdded(parentId) ? '/img/check-mark.svg' : '/img/plus.svg'}
+                src={isItemAdded(id) ? '/img/check-mark.svg' : '/img/plus.svg'}
                 alt="плюсик"
               />
             )}
