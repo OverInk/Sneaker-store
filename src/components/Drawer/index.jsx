@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import Info from '../Info';
+import Info from '../Info/Info';
 import AppContext from '../../context';
 import { useCart } from '../../hooks/useCart';
 
@@ -93,9 +93,9 @@ function Drawer({ onClose, onRemove, items, opened }) {
           </div>
         ) : (
           <Info
-            title={setCartItems ? 'Заказ оформлен!' : 'Корзина пустая'}
+            title={isOrderComplete ? 'Заказ оформлен!' : 'Корзина пустая'}
             description={
-              setCartItems
+              isOrderComplete
                 ? `Ваш заказ #${orderId} будет передан курьерской службе`
                 : 'Добавьте хотя бы одну пару кроссовок, чтобы сделать заказ'
             }
