@@ -44,6 +44,10 @@ function Drawer({ onClose, onRemove, items, opened }) {
     setIsLoading(false);
   };
 
+  //   if (!totalPrice) {
+  //     return 'Hello';
+  //   }
+
   return (
     <div className={`${styles.overlay} ${opened ? styles.overlayVisible : ''}`}>
       <div className={styles.drawer}>

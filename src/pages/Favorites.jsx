@@ -1,9 +1,14 @@
 import React from 'react';
 import Card from '../components/Card';
 import AppContext from '../context';
+import { NoFavorite } from '../components/NoFavorite';
 
 function Favorites({ onAddToFavorite }) {
   const { favorite } = React.useContext(AppContext);
+
+  if (!favorite) {
+    return <NoFavorite />;
+  }
 
   return (
     <div className="content p-40">
