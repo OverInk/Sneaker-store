@@ -1,12 +1,12 @@
 import React from 'react';
 import Card from '../components/Card';
 import AppContext from '../context';
-import { NoFavorite } from '../components/NoFavorite';
+import { NoFavorite } from '../components/NoFavorite/NoFavorite';
 
 function Favorites({ onAddToFavorite }) {
   const { favorite } = React.useContext(AppContext);
 
-  if (!favorite) {
+  if (favorite) {
     return <NoFavorite />;
   }
 
