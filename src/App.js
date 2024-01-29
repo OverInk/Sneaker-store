@@ -143,6 +143,7 @@ function App() {
           setCartItems,
           onAddToFavorite,
           onAddToCart,
+          setFavorite,
         }}>
         <Drawer
           items={cartItems}

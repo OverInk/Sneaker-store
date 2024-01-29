@@ -4,9 +4,9 @@ import AppContext from '../context';
 import { NoFavorite } from '../components/NoFavorite/NoFavorite';
 
 function Favorites({ onAddToFavorite }) {
-  const { favorite } = React.useContext(AppContext);
+  const { favorite, setFavorite } = React.useContext(AppContext);
 
-  if (favorite) {
+  if (!setFavorite) {
     return <NoFavorite />;
   }
 

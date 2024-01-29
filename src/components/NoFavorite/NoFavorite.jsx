@@ -1,7 +1,11 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styles from './NoFavorite.module.scss';
+import AppContext from '../../context';
+import Header from '../Header';
 
 export function NoFavorite() {
+  const { setCartOpened } = React.useContext(AppContext);
   return (
     <div className={styles.fullNoFav}>
       <div className={styles.boxNoFav}>
@@ -10,10 +14,12 @@ export function NoFavorite() {
         <p>Вы ничего не добавляли в закладки</p>
       </div>
 
-      <button className={styles.greenButton}>
-        <img src="/img/anti-arrow.svg" alt="arrow" />
-        Вернуться назад
-      </button>
+      <Link to="/">
+        <button className={styles.greenButton}>
+          <img src="/img/anti-arrow.svg" alt="arrow" />
+          Вернуться назад
+        </button>
+      </Link>
     </div>
   );
 }

@@ -5,7 +5,7 @@ import { useCart } from '../hooks/useCart';
 
 function Header({ onClickCart }) {
   //   const { cartItems } = React.useContext(AppContext);
-  const { cartItems, setCartItems, totalPrice } = useCart();
+  const { totalPrice } = useCart();
 
   //   console.log(cartItems.reduce((sum, obj) => obj.price + sum, 0));
   // метод reduce нужен длчя того, чтобы пробежаться по каждому значению в массиве
