@@ -93,6 +93,7 @@ function Drawer({ onClose, onRemove, items, opened }) {
           </div>
         ) : (
           <Info
+            image={isOrderComplete ? '/img/order.svg' : '/img/box.svg'}
             title={isOrderComplete ? 'Заказ оформлен!' : 'Корзина пустая'}
             description={
               isOrderComplete

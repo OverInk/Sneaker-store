@@ -6,7 +6,8 @@ import styles from './Info.module.scss';
 const Info = ({ image, title, description }) => {
   const { setCartOpened } = React.useContext(AppContext);
   return (
-    <div class="empty-drawer">
+    <div class="empty-drawer h100p d-flex align-center justify-center">
+      <img src={image} alt="Либо пустая коробка, либо галочка со списком" />
       <h2>{title}</h2>
       <p class="opacity-6">{description}</p>
       <button className={styles.greenButton} onClick={() => setCartOpened(false)}>
