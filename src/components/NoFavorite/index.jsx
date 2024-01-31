@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styles from './NoFavorite.module.scss';
 import AppContext from '../../context';
-import Header from '../Header';
 
 export function NoFavorite() {
   const { setCartOpened } = React.useContext(AppContext);
