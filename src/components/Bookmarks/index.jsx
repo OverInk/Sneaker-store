@@ -8,7 +8,7 @@ export function NoFavorite() {
   return (
     <div className={styles.fullMarks}>
       <div className={styles.boxMarks}>
-        <img src="/img/sadsmile.svg" alt="" />
+        <img src="/img/bigeyessmile.svg" alt="" />
         <div>Закладок нет</div>
         <p>Вы ничего не добавляли в закладки</p>
       </div>
