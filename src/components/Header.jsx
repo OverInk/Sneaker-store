@@ -29,16 +29,18 @@ function Header({ onClickCart }) {
           <img width={18} height={18} src="/img/cart.svg" alt="корзина" />
           <span style={{ marginLeft: 10 }}>{totalPrice} рублей</span>
         </li>
-        <li className="mr-20 cu-p">
-          <Link to="/favorites">
+        <Link to="/favorites">
+          <li className="mr-20 cu-p d-flex flex-row">
             <img width={18} height={18} src="/img/heart.svg" alt="Heart" />
-          </Link>
-        </li>
-        <li>
-          <Link to="/orders">
+            <p style={{ paddingLeft: 10 }}>Закладки</p>
+          </li>
+        </Link>
+        <Link to="/orders">
+          <li className="mr-20 cu-p d-flex flex-row">
             <img width={18} height={18} src="/img/user.svg" alt="User" />
-          </Link>
-        </li>
+            <p style={{ paddingLeft: 10 }}>Заказы</p>
+          </li>
+        </Link>
       </ul>
     </header>
   );
